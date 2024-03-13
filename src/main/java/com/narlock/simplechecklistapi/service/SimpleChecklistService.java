@@ -6,12 +6,11 @@ import com.narlock.simplechecklistapi.model.ChecklistItemRequest;
 import com.narlock.simplechecklistapi.model.error.NotFoundException;
 import com.narlock.simplechecklistapi.repository.ChecklistItemRepository;
 import com.narlock.simplechecklistapi.repository.ChecklistRepository;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -23,11 +22,15 @@ public class SimpleChecklistService {
 
   // List
   public Checklist createChecklist(Checklist checklist) {
-    checklistRepository.saveNewChecklist(checklist.getName(), checklist.getProfileId(), checklist.getRepeatEvery());
-    List<Checklist> checklists = checklistRepository.findByProfileIdAndName(checklist.getProfileId(), checklist.getName());
+    checklistRepository.saveNewChecklist(
+        checklist.getName(), checklist.getProfileId(), checklist.getRepeatEvery());
+    List<Checklist> checklists =
+        checklistRepository.findByProfileIdAndName(checklist.getProfileId(), checklist.getName());
 
-    if(checklists.size() > 1) {
-      throw new RuntimeException("Unexpected result from backend - more then one result for checklist " + checklist.getName());
+    if (checklists.size() > 1) {
+      throw new RuntimeException(
+          "Unexpected result from backend - more then one result for checklist "
+              + checklist.getName());
     }
 
     if (!checklists.isEmpty()) {
@@ -40,8 +43,9 @@ public class SimpleChecklistService {
   public Checklist getChecklist(String name, Integer profileId) {
     List<Checklist> checklists = checklistRepository.findByProfileIdAndName(profileId, name);
 
-    if(checklists.size() > 1) {
-      throw new RuntimeException("Unexpected result from backend - more then one result for checklist " + name);
+    if (checklists.size() > 1) {
+      throw new RuntimeException(
+          "Unexpected result from backend - more then one result for checklist " + name);
     }
 
     if (!checklists.isEmpty()) {
@@ -69,7 +73,7 @@ public class SimpleChecklistService {
 
   public ChecklistItem getChecklistItem(Integer id) {
     Optional<ChecklistItem> checklistItemOptional = checklistItemRepository.findById(id);
-    if(checklistItemOptional.isPresent()) {
+    if (checklistItemOptional.isPresent()) {
       return checklistItemOptional.get();
     }
 
@@ -84,5 +88,9 @@ public class SimpleChecklistService {
 
   public void deleteChecklistItem(Integer id) {
     checklistItemRepository.deleteById(id);
+  }
+
+  public List<ChecklistItem> getChecklistItemsByChecklistName(String checklistName) {
+    return checklistItemRepository.findByChecklistName(checklistName);
   }
 }

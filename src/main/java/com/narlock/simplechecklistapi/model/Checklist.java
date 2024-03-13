@@ -12,17 +12,17 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "Checklist")
 public class Checklist {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private String name;
 
-    private Integer profileId;
+  private Integer profileId;
 
-    // DAY, WEEK, MONTH (DAY by default)
-    private String repeatEvery;
+  // DAY, WEEK, MONTH (DAY by default)
+  private String repeatEvery;
 
-    public Checklist(Integer profileId, String repeatEvery) {
-        this.profileId = profileId;
-        this.repeatEvery = repeatEvery;
-    }
+  public Checklist(Integer profileId, String repeatEvery) {
+    this.profileId = profileId;
+    this.repeatEvery = repeatEvery;
+  }
 }
