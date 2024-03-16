@@ -6,11 +6,8 @@ import com.narlock.simplechecklistapi.model.ChecklistItemRequest;
 import com.narlock.simplechecklistapi.model.error.NotFoundException;
 import com.narlock.simplechecklistapi.repository.ChecklistItemRepository;
 import com.narlock.simplechecklistapi.repository.ChecklistRepository;
-
-import java.awt.print.Pageable;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -97,15 +94,16 @@ public class SimpleChecklistService {
     LocalDate now = LocalDate.now();
     ChecklistItem checklistItem = getChecklistItem(id);
 
-    if(checklistItem.getLastCompletedDate() == null) {
+    if (checklistItem.getLastCompletedDate() == null) {
       // No current streak, set to zero, first time completed
       checklistItem.setStreak(0);
     } else {
-      Duration duration = Duration.between(checklistItem.getLastCompletedDate().atStartOfDay(), now.atStartOfDay());
+      Duration duration =
+          Duration.between(checklistItem.getLastCompletedDate().atStartOfDay(), now.atStartOfDay());
       if (duration.compareTo(Duration.ofHours(24)) <= 0) {
         System.out.println("The dates are within 24 hours of each other.");
         // check streak as well
-        if(checklistItem.getStreak() == null) {
+        if (checklistItem.getStreak() == null) {
           checklistItem.setStreak(0);
         } else {
           checklistItem.setStreak(checklistItem.getStreak() + 1);

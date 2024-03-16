@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.narlock</groupId>
-	<artifactId>simple-weight-track-api</artifactId>
+	<artifactId>simple-checklist-api</artifactId>
 	<version>1.0.0</version>
-	<name>simple-weight-track-api</name>
-	<description>Weight tracking API</description>
+	<name>simple-checklist-api</name>
+	<description>Checklist API</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
