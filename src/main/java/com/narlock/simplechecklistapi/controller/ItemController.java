@@ -36,6 +36,12 @@ public class ItemController {
     return simpleChecklistService.updateChecklistItem(id, checklistItemRequest);
   }
 
+  @PatchMapping("/{id}/streak")
+  @ResponseStatus(HttpStatus.OK)
+  public ChecklistItem checklistItemStreak(@PathVariable("id") Integer id) {
+    return simpleChecklistService.updateStreak(id);
+  }
+
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteChecklistItem(@PathVariable("id") Integer id) {

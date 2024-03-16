@@ -21,6 +21,7 @@ public class ChecklistItem {
   private String description;
   private LocalDate lastCompletedDate;
   private String excludeDays;
+  private Integer streak;
 
   public ChecklistItem(
       String checklistName,

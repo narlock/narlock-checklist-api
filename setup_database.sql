@@ -12,5 +12,6 @@ CREATE TABLE ChecklistItem(
     name VARCHAR(100) NOT NULL,
     description VARCHAR(255),
     lastCompletedDate DATE,
-    excludeDays VARCHAR(25)
+    excludeDays VARCHAR(25),
+    streak INT
 );
