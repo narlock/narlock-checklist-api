@@ -1,4 +1,4 @@
-package com.narlock.simplechecklistapi.config;
+package com.narlock.checklistapi.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

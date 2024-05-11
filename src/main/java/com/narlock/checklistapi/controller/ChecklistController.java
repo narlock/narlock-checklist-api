@@ -1,7 +1,7 @@
-package com.narlock.simplechecklistapi.controller;
+package com.narlock.checklistapi.controller;
 
-import com.narlock.simplechecklistapi.model.Checklist;
-import com.narlock.simplechecklistapi.service.SimpleChecklistService;
+import com.narlock.checklistapi.model.Checklist;
+import com.narlock.checklistapi.service.ChecklistService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ChecklistController {
 
-  private final SimpleChecklistService simpleChecklistService;
+  private final ChecklistService checklistService;
 
   @PostMapping
   @ResponseStatus(HttpStatus.OK)
   public Checklist createChecklist(@RequestBody Checklist checklist) {
-    return simpleChecklistService.createChecklist(checklist);
+    return checklistService.createChecklist(checklist);
   }
 
   @GetMapping
@@ -26,7 +26,7 @@ public class ChecklistController {
   public Checklist getChecklist(
       @RequestParam(name = "name") String name,
       @RequestParam(name = "profileId") Integer profileId) {
-    return simpleChecklistService.getChecklist(name, profileId);
+    return checklistService.getChecklist(name, profileId);
   }
 
   @PatchMapping
@@ -35,7 +35,7 @@ public class ChecklistController {
       @RequestParam(name = "name") String name,
       @RequestParam(name = "profileId") Integer profileId,
       @RequestParam(name = "repeatEvery") String repeatEvery) {
-    return simpleChecklistService.updateChecklistRepeat(name, profileId, repeatEvery);
+    return checklistService.updateChecklistRepeat(name, profileId, repeatEvery);
   }
 
   @DeleteMapping
@@ -43,6 +43,6 @@ public class ChecklistController {
   public void deleteChecklist(
       @RequestParam(name = "name") String name,
       @RequestParam(name = "profileId") Integer profileId) {
-    simpleChecklistService.deleteChecklist(name, profileId);
+    checklistService.deleteChecklist(name, profileId);
   }
 }

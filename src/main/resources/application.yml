@@ -1,9 +1,9 @@
-spring.config.import: classpath:secrets.properties
-
 server:
   port: 8085
 
 spring:
+  config:
+    import: "file:${user.home}/Documents/narlock/secrets/mysql.properties"
   datasource:
     url: jdbc:mysql://localhost:3306/narlock
     username: ${lmysql.username}

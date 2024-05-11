@@ -1,4 +1,4 @@
-package com.narlock.simplechecklistapi.model;
+package com.narlock.checklistapi.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,15 +10,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "Checklist")
+@IdClass(ChecklistId.class)
 public class Checklist {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String name;
+  @Id private String name;
 
+  @Id
+  @Column(name = "profile_id")
   private Integer profileId;
 
-  // DAY, WEEK, MONTH (DAY by default)
+  @Column(name = "repeat_every")
   private String repeatEvery;
 
   public Checklist(Integer profileId, String repeatEvery) {

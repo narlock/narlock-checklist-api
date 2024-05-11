@@ -1,7 +1,7 @@
-package com.narlock.simplechecklistapi.controller;
+package com.narlock.checklistapi.controller;
 
-import com.narlock.simplechecklistapi.model.error.ErrorResponse;
-import com.narlock.simplechecklistapi.model.error.NotFoundException;
+import com.narlock.checklistapi.model.error.ErrorResponse;
+import com.narlock.checklistapi.model.error.NotFoundException;
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

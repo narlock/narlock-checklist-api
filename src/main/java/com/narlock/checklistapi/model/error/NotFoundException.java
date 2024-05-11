@@ -1,4 +1,4 @@
-package com.narlock.simplechecklistapi.model.error;
+package com.narlock.checklistapi.model.error;
 
 public class NotFoundException extends RuntimeException {
   public NotFoundException(String message) {

@@ -1,11 +1,12 @@
-package com.narlock.simplechecklistapi.service;
+package com.narlock.checklistapi.service;
 
-import com.narlock.simplechecklistapi.model.Checklist;
-import com.narlock.simplechecklistapi.model.ChecklistItem;
-import com.narlock.simplechecklistapi.model.ChecklistItemRequest;
-import com.narlock.simplechecklistapi.model.error.NotFoundException;
-import com.narlock.simplechecklistapi.repository.ChecklistItemRepository;
-import com.narlock.simplechecklistapi.repository.ChecklistRepository;
+import com.narlock.checklistapi.model.Checklist;
+import com.narlock.checklistapi.model.ChecklistItem;
+import com.narlock.checklistapi.model.ChecklistItemId;
+import com.narlock.checklistapi.model.ChecklistItemRequest;
+import com.narlock.checklistapi.model.error.NotFoundException;
+import com.narlock.checklistapi.repository.ChecklistItemRepository;
+import com.narlock.checklistapi.repository.ChecklistRepository;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SimpleChecklistService {
+public class ChecklistService {
 
   private final ChecklistRepository checklistRepository;
   private final ChecklistItemRepository checklistItemRepository;
@@ -70,11 +71,18 @@ public class SimpleChecklistService {
 
   public ChecklistItem createChecklistItem(ChecklistItemRequest checklistItemRequest) {
     ChecklistItem checklistItem = checklistItemRequest.toChecklistItem();
-    return checklistItemRepository.save(checklistItem);
+    checklistItemRepository.save(checklistItem);
+    return checklistItemRepository.findByChecklistNameProfileIdName(checklistItemRequest.getChecklistName(), checklistItemRequest.getProfileId(), checklistItemRequest.getName());
   }
 
-  public ChecklistItem getChecklistItem(Integer id) {
-    Optional<ChecklistItem> checklistItemOptional = checklistItemRepository.findById(id);
+  public ChecklistItem getChecklistItem(Integer id, String checklistName, Integer profileId) {
+    Optional<ChecklistItem> checklistItemOptional =
+        checklistItemRepository.findById(
+            ChecklistItemId.builder()
+                .id(id)
+                .checklistName(checklistName)
+                .profileId(profileId)
+                .build());
     if (checklistItemOptional.isPresent()) {
       return checklistItemOptional.get();
     }
@@ -89,10 +97,10 @@ public class SimpleChecklistService {
     return checklistItemRepository.save(checklistItem);
   }
 
-  public ChecklistItem updateStreak(Integer id) {
+  public ChecklistItem updateStreak(Integer id, String checklistName, Integer profileId) {
     // Set streak details
     LocalDate now = LocalDate.now();
-    ChecklistItem checklistItem = getChecklistItem(id);
+    ChecklistItem checklistItem = getChecklistItem(id, checklistName, profileId);
 
     if (checklistItem.getLastCompletedDate() == null) {
       // No current streak, set to zero, first time completed
@@ -118,11 +126,13 @@ public class SimpleChecklistService {
     return checklistItemRepository.save(checklistItem);
   }
 
-  public void deleteChecklistItem(Integer id) {
-    checklistItemRepository.deleteById(id);
+  public void deleteChecklistItem(Integer id, String checklistItem, Integer profileId) {
+    checklistItemRepository.deleteById(
+        ChecklistItemId.builder().id(id).checklistName(checklistItem).profileId(profileId).build());
   }
 
-  public List<ChecklistItem> getChecklistItemsByChecklistName(String checklistName) {
-    return checklistItemRepository.findByChecklistName(checklistName);
+  public List<ChecklistItem> getChecklistItemsByChecklistName(
+      String checklistName, Integer profileId) {
+    return checklistItemRepository.findByChecklistName(checklistName, profileId);
   }
 }
