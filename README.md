@@ -36,16 +36,16 @@ lmysql.password=<replace_with_your_mysql_password>
 
 ## API Specification
 
-[Create a checklist](#create-a-checklist)
-[Retrieve a checklist](#retrieve-a-checklist)
-[Update checklist](#update-checklist)
-[Delete a checklist](#delete-a-checklist)
-[Create a item for a checklist]()
-[Retrieve a item in a checklist]()
-[Update a checklist item]()
-[Update checklist item's streak]()
-[Delete a checklist item]()
-[Retrieve checklist items by checklist name]()
+- [Create a checklist](#create-a-checklist)
+- [Retrieve a checklist](#retrieve-a-checklist)
+- [Update checklist](#update-checklist)
+- [Delete a checklist](#delete-a-checklist)
+- [Create a item for a checklist]()
+- [Retrieve a item in a checklist]()
+- [Update a checklist item]()
+- [Update checklist item's streak]()
+- [Delete a checklist item]()
+- [Retrieve checklist items by checklist name]()
 
 ### Create a checklist
 Creates a new checklist.
@@ -286,5 +286,5 @@ HTTP/1.1 200 OK
 ```
 
 ## Testing
-[!NOTE]
-This section is currently in progress!
+> [!NOTE]
+> This section is currently in progress!
