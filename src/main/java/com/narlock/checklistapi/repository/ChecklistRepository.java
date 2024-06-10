@@ -21,6 +21,8 @@ public interface ChecklistRepository extends JpaRepository<Checklist, ChecklistI
 
   List<Checklist> findByProfileIdAndName(Integer profileId, String name);
 
+  List<Checklist> findByProfileId(Integer profileId);
+
   @Modifying
   @Transactional
   @Query("DELETE FROM Checklist c WHERE c.profileId = :profileId AND c.name = :name")

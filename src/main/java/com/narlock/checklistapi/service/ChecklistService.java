@@ -70,9 +70,18 @@ public class ChecklistService {
   // Item
 
   public ChecklistItem createChecklistItem(ChecklistItemRequest checklistItemRequest) {
+    // Ensure that the created checklist item is null
+    checklistItemRequest.setLastCompletedDate(null);
+
     ChecklistItem checklistItem = checklistItemRequest.toChecklistItem();
     checklistItemRepository.save(checklistItem);
     return checklistItemRepository.findByChecklistNameProfileIdName(checklistItemRequest.getChecklistName(), checklistItemRequest.getProfileId(), checklistItemRequest.getName());
+  }
+
+  public ChecklistItem completeChecklistItem(Integer id, String checklistName, Integer profileId) {
+    ChecklistItem checklistItem = getChecklistItem(id, checklistName, profileId);
+    checklistItem.setLastCompletedDate(LocalDate.now());
+    return checklistItemRepository.saveAndFlush(checklistItem);
   }
 
   public ChecklistItem getChecklistItem(Integer id, String checklistName, Integer profileId) {
@@ -135,4 +144,8 @@ public class ChecklistService {
       String checklistName, Integer profileId) {
     return checklistItemRepository.findByChecklistName(checklistName, profileId);
   }
+
+    public List<Checklist> getChecklistsForProfile(Integer profileId) {
+      return checklistRepository.findByProfileId(profileId);
+    }
 }

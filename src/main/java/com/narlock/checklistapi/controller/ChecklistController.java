@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/checklist")
@@ -23,9 +25,15 @@ public class ChecklistController {
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
+  public List<Checklist> getChecklistsForProfile(@RequestParam(name = "profileId") Integer profileId) {
+    return checklistService.getChecklistsForProfile(profileId);
+  }
+
+  @GetMapping("/{profileId}")
+  @ResponseStatus(HttpStatus.OK)
   public Checklist getChecklist(
       @RequestParam(name = "name") String name,
-      @RequestParam(name = "profileId") Integer profileId) {
+      @PathVariable(name = "profileId") Integer profileId) {
     return checklistService.getChecklist(name, profileId);
   }
 

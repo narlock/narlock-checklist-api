@@ -48,6 +48,15 @@ public class ItemController {
     return checklistService.updateStreak(id, checklistName, profileId);
   }
 
+  @PatchMapping("/{id}/complete")
+  @ResponseStatus(HttpStatus.OK)
+  public ChecklistItem checklistItemComplete(
+          @PathVariable("id") Integer id,
+          @RequestParam("checklistName") String checklistName,
+          @RequestParam("profileId") Integer profileId) {
+    return checklistService.completeChecklistItem(id, checklistName, profileId);
+  }
+
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteChecklistItem(
