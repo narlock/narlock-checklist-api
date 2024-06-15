@@ -23,8 +23,10 @@ public interface ChecklistItemRepository extends JpaRepository<ChecklistItem, Ch
       @Param("name") String name);
 
   @Modifying
-  @Query("DELETE FROM ChecklistItem c WHERE c.checklistName = :checklistName AND c.profileId = :profileId")
-  void deleteByChecklistNameAndProfileId(@Param("checklistName") String checklistName, @Param("profileId") Integer profileId);
+  @Query(
+      "DELETE FROM ChecklistItem c WHERE c.checklistName = :checklistName AND c.profileId = :profileId")
+  void deleteByChecklistNameAndProfileId(
+      @Param("checklistName") String checklistName, @Param("profileId") Integer profileId);
 
   @Modifying
   @Query("DELETE FROM ChecklistItem c WHERE c.id = :id")
