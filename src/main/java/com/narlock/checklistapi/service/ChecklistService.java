@@ -11,6 +11,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -63,8 +65,10 @@ public class ChecklistService {
     return checklistRepository.save(checklist);
   }
 
+  @Transactional
   public void deleteChecklist(String name, Integer profileId) {
     checklistRepository.deleteByProfileIdAndName(profileId, name);
+    checklistItemRepository.deleteByChecklistNameAndProfileId(name, profileId);
   }
 
   // Item
