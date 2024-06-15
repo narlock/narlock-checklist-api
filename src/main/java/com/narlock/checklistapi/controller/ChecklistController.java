@@ -2,12 +2,11 @@ package com.narlock.checklistapi.controller;
 
 import com.narlock.checklistapi.model.Checklist;
 import com.narlock.checklistapi.service.ChecklistService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -25,7 +24,8 @@ public class ChecklistController {
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<Checklist> getChecklistsForProfile(@RequestParam(name = "profileId") Integer profileId) {
+  public List<Checklist> getChecklistsForProfile(
+      @RequestParam(name = "profileId") Integer profileId) {
     return checklistService.getChecklistsForProfile(profileId);
   }
 

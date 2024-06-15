@@ -75,7 +75,10 @@ public class ChecklistService {
 
     ChecklistItem checklistItem = checklistItemRequest.toChecklistItem();
     checklistItemRepository.save(checklistItem);
-    return checklistItemRepository.findByChecklistNameProfileIdName(checklistItemRequest.getChecklistName(), checklistItemRequest.getProfileId(), checklistItemRequest.getName());
+    return checklistItemRepository.findByChecklistNameProfileIdName(
+        checklistItemRequest.getChecklistName(),
+        checklistItemRequest.getProfileId(),
+        checklistItemRequest.getName());
   }
 
   public ChecklistItem completeChecklistItem(Integer id, String checklistName, Integer profileId) {
@@ -145,7 +148,7 @@ public class ChecklistService {
     return checklistItemRepository.findByChecklistName(checklistName, profileId);
   }
 
-    public List<Checklist> getChecklistsForProfile(Integer profileId) {
-      return checklistRepository.findByProfileId(profileId);
-    }
+  public List<Checklist> getChecklistsForProfile(Integer profileId) {
+    return checklistRepository.findByProfileId(profileId);
+  }
 }

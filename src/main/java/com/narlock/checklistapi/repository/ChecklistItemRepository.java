@@ -14,6 +14,10 @@ public interface ChecklistItemRepository extends JpaRepository<ChecklistItem, Ch
   List<ChecklistItem> findByChecklistName(
       @Param("checklistName") String checklistName, @Param("profileId") Integer profileId);
 
-  @Query("SELECT c FROM ChecklistItem c WHERE c.checklistName = :checklistName AND c.profileId = :profileId AND c.name = :name")
-  ChecklistItem findByChecklistNameProfileIdName(@Param("checklistName") String checklistName, @Param("profileId") Integer profileId, @Param("name") String name);
+  @Query(
+      "SELECT c FROM ChecklistItem c WHERE c.checklistName = :checklistName AND c.profileId = :profileId AND c.name = :name")
+  ChecklistItem findByChecklistNameProfileIdName(
+      @Param("checklistName") String checklistName,
+      @Param("profileId") Integer profileId,
+      @Param("name") String name);
 }

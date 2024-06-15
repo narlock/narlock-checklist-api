@@ -51,9 +51,9 @@ public class ItemController {
   @PatchMapping("/{id}/complete")
   @ResponseStatus(HttpStatus.OK)
   public ChecklistItem checklistItemComplete(
-          @PathVariable("id") Integer id,
-          @RequestParam("checklistName") String checklistName,
-          @RequestParam("profileId") Integer profileId) {
+      @PathVariable("id") Integer id,
+      @RequestParam("checklistName") String checklistName,
+      @RequestParam("profileId") Integer profileId) {
     return checklistService.completeChecklistItem(id, checklistName, profileId);
   }
 
