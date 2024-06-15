@@ -60,10 +60,8 @@ public class ItemController {
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteChecklistItem(
-      @PathVariable("id") Integer id,
-      @RequestParam("checklistName") String checklistName,
-      @RequestParam("profileId") Integer profileId) {
-    checklistService.deleteChecklistItem(id, checklistName, profileId);
+      @PathVariable("id") Integer id) {
+    checklistService.deleteChecklistItem(id);
   }
 
   @GetMapping

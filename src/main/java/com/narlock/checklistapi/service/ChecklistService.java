@@ -142,9 +142,9 @@ public class ChecklistService {
     return checklistItemRepository.save(checklistItem);
   }
 
-  public void deleteChecklistItem(Integer id, String checklistItem, Integer profileId) {
-    checklistItemRepository.deleteById(
-        ChecklistItemId.builder().id(id).checklistName(checklistItem).profileId(profileId).build());
+  @Transactional
+  public void deleteChecklistItem(Integer id) {
+    checklistItemRepository.deleteByChecklistItemId(id);
   }
 
   public List<ChecklistItem> getChecklistItemsByChecklistName(
